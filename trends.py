@@ -1,5 +1,6 @@
 """Visualizing Twitter Sentiment Across America"""
 
+import re
 from data import word_sentiments, load_tweets
 from datetime import datetime
 from doctest import run_docstring_examples
@@ -65,7 +66,8 @@ def extract_words(text):
     ['cat', 'on', 'my', 'keyboard']
     """
     "*** YOUR CODE HERE ***"
-    return text.split()  # Replace this line
+    words = " ".join(re.findall("[a-zA-Z]+", text))
+    return words.split()  # Replace this line
 
 def make_sentiment(value):
     """Return a sentiment, which represents a value that may not exist.
@@ -86,15 +88,21 @@ def make_sentiment(value):
     """
     assert value is None or (value >= -1 and value <= 1), 'Illegal value'
     "*** YOUR CODE HERE ***"
+    return value
 
 def has_sentiment(s):
     """Return whether sentiment s has a value."""
     "*** YOUR CODE HERE ***"
+    if(s == None):
+        return False
+    else:
+        return True
 
 def sentiment_value(s):
     """Return the value of a sentiment s."""
     assert has_sentiment(s), 'No sentiment value'
     "*** YOUR CODE HERE ***"
+    return s
 
 def get_word_sentiment(word):
     """Return a sentiment representing the degree of positive or negative
