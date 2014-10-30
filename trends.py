@@ -144,12 +144,13 @@ def analyze_tweet_sentiment(tweet):
     count = 0.0
     avgnum = 0.0
     for word in extractedWords:
-        wordt = get_word_sentiment(word)
-        if(has_sentiment(wordt) == True):
-            avgnum = avgnum + float(sentiment_value(get_word_sentiment(wordt)))
-            count = count + 1.0
+        if(has_sentiment(get_word_sentiment(word)) == True):
+            avgnum = avgnum + sentiment_value(get_word_sentiment(word))
+            count = count + 1
     if(count > 0):
         avgnum = avgnum / count
+    elif (count == 0):
+        return average   
     return avgnum
 
 
