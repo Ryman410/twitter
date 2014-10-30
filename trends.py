@@ -140,7 +140,17 @@ def analyze_tweet_sentiment(tweet):
     """
     average = make_sentiment(None)
     "*** YOUR CODE HERE ***"
-    return average
+    extractedWords = tweet_words(tweet)
+    count = 0.0
+    avgnum = 0.0
+    for word in extractedWords:
+        wordt = get_word_sentiment(word)
+        if(has_sentiment(wordt) == True):
+            avgnum = avgnum + float(sentiment_value(get_word_sentiment(wordt)))
+            count = count + 1.0
+    if(count > 0):
+        avgnum = avgnum / count
+    return avgnum
 
 
 # Phase 2: The Geometry of Maps
@@ -166,7 +176,7 @@ def find_centroid(polygon):
     >>> tuple(map(float, find_centroid([p1, p2, p1])))  # A zero-area polygon
     (1.0, 2.0, 0.0)
     """
-    "*** YOUR CODE HERE ***"
+    "*** YOUR CODE HERE ***"    
 
 def find_center(polygons):
     """Compute the geographic center of a state, averaged over its polygons.
