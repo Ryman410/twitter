@@ -179,19 +179,15 @@ def find_centroid(polygon):
     """
     "*** YOUR CODE HERE ***"
     poly = len(polygon)-1
-    A = 0
-    if A == 0:
-        return latitude(polygon[0]), longitude(polygon[0]), 0
+    
     for i in range(poly):
-        Cx = latitude[i]
-        Cy = longitude[i]
-        
-    A = 0.5
+        area = 0.5*((latitude(polygon[i])*(longitude(polygon[i+1])))-((latitude(polygon[i+1]))*longitude(polygon[i])))
+        if area == 0:
+            return (latitude(polygon[0]), longitude(polygon[0]), 0)
     for i in range(poly):
-        A = 0.5*((Cx*(Cy+1))-((Cx+1)*Cy))
-    for i in range(poly):
-        Cx = ((Cx + (Cx+1))*((Cx*(Cy+1)) - ((Cx+1)*Cy)))/(6 * A)
-        Cy = ((Cy + (Cy+1))*((Cx*(Cy+1)) - ((Cx+1)*Cy)))/(6 * A)
+        Cx = ((latitude(polygon[i]) + (latitude(polygon[i+1])))*((latitude(polygon[i])*(longitude(polygon[i+1]))) - ((latitude(polygon[i]))*longitude(polygon[i]))))
+        Cy = ((longitude(polygon[i]) + (longitude(polygon[i+1])))*((latitude(polygon[i])*(longitude(polygon[i+1]))) - ((latitude(polygon[i+1]))*longitude(polygon[i]))))
+    return Cx/(6*area),Cy/(6*area), abs(area)
 
 def find_center(polygons):
     """Compute the geographic center of a state, averaged over its polygons.
